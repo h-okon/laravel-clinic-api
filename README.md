@@ -1,3 +1,42 @@
+# laravel-clinic-api
+To run locally make sure to have PHP and Composer installed.
+
+1. Clone the repository
+2. Install required packages
+```bash
+composer install
+```
+3. Setup .env file -> setup connection with DB (for example sqlite: change dbserver=sqlite in .env and create database.sqlite file in databases/)
+4. Run migrations
+```bash
+php artisan migrate
+```
+5. Install Laravel Passport keys
+```bash
+php artisan passport:install
+```
+6. If required generate Laravel keys
+```bash
+php artisan key:generate
+```
+7. Startup development server:
+```bash
+php artisan serve
+```
+
+Available routings
+| Method | Path          | Action   | Routing name  | Middleware |
+|--------|---------------|----------|---------------|------------|
+| POST   | /api/login    | login    | user.login    | none       |
+| POST   | /api/register | register | user.register | none       |
+| POST   | /api/details  | details  | user.details  | {auth:api} |
+
+| Name     | Required                          | Retrun | Type |
+|----------|-----------------------------------|--------|------|
+| login    | email, password                   | token  | JSON |
+| register | email, name, password, c_password | token  | JSON |
+| details  | token                             | JSON   | JSON |
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
