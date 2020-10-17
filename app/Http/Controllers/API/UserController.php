@@ -41,8 +41,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request)
-    {
+    public function register(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -52,13 +51,15 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(['error'=>$validator->errors()], 401);
         }
-        $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
-        $user = User::create($input);
-        $user->patient()->create();
-        $success['token'] =  $user->createToken('Klinika')-> accessToken;
-        $success['name'] =  $user->name;
-        return response()->json(['success'=>$success], $this-> successStatus);
+        else{
+            $input = $request->all();
+            $input['password'] = bcrypt($input['password']);
+            $user = User::create($input);
+            $user->patient()->create();
+            $success['token'] =  $user->createToken('Klinika')-> accessToken;
+            $success['name'] =  $user->name;
+            return response()->json(['success'=>$success], $this-> successStatus);
+        }
     }
     /**
      * details api
