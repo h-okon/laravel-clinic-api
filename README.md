@@ -25,11 +25,19 @@ php artisan serve
 ```
 
 Available routings
-| Method | Path          | Action   | Routing name  | Middleware |
-|--------|---------------|----------|---------------|------------|
-| POST   | /api/login    | login    | user.login    | none       |
-| POST   | /api/register | register | user.register | none       |
-| POST   | /api/details  | details  | user.details  | {auth:api} |
+| Method | Path                       | Action   | Routing name       | Middleware |
+|--------|----------------------------|----------|--------------------|------------|
+| POST   | /api/login                 | login    | user.login         | none       |
+| POST   | /api/register              | register | user.register      | none       |
+| POST   | /api/details               | details  | user.details       | {auth:api} |
+|                          Medication CRUD                                         |
+| GET    | /api/medications           | index     | medcation.index   | none       |
+| POST   | /api/medications           | store     | medcation.store   | {auth:api} |
+| GET    | /api/medications/{id}      | show      | medcation.show    | none       |
+| GET    | /api/medications/{id}/edit | edit      | medcation.edit    | edit       |
+| PUT    | /api/medications/{id}      | update    | medcation.update  | none       |
+| POST   | /api/medications/{id}      | destroy   | medication.destroy| {auth:api} |
+
 
 | Name     | Required                          | Retrun | Type |
 |----------|-----------------------------------|--------|------|
