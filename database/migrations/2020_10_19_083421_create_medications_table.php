@@ -16,7 +16,7 @@ class CreateMedicationsTable extends Migration
         Schema::create('medications', function (Blueprint $table) {
             $table->id();
             $table->string('Name');
-            $table->bigInteger('GTIN/EAN_Code');
+            $table->bigInteger('GTIN_code');
             $table->timestamps();
         });
     }
