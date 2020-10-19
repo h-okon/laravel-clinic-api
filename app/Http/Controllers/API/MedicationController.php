@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Models\Medication;
+use \Validator;
+
 class MedicationController extends Controller
 {
     /**
