@@ -27,6 +27,7 @@ php artisan serve
 Available routings
 | Method | Path                       | Action   | Routing name       | Middleware |
 |--------|----------------------------|----------|--------------------|------------|
+|                     Authentication & Permissions                                 |
 | POST   | /api/login                 | login    | user.login         | none       |
 | POST   | /api/register              | register | user.register      | none       |
 | POST   | /api/details               | details  | user.details       | {auth:api} |
