@@ -32,7 +32,7 @@ class MedicationController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'GTIN_code' => 'required|min:8',
+            'gtin' => 'required|min:8',
         ]);
         if($validator->fails())
         {

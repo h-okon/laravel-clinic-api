@@ -11,6 +11,6 @@ class Medication extends Model
 
     protected $fillable = [
         'name',
-        'gtin_code',
+        'gtin',
     ];
 }
