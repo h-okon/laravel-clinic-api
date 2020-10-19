@@ -55,7 +55,7 @@ class UserController extends Controller
             $input = $request->all();
             $input['password'] = bcrypt($input['password']);
             $user = User::create($input);
-            $user->patient()->create();
+            $user->patient()->create(); // Create patient object when creating user
             $success['token'] =  $user->createToken('Klinika')-> accessToken;
             $success['name'] =  $user->name;
             return response()->json(['success'=>$success], $this-> successStatus);
