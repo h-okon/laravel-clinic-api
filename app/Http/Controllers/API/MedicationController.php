@@ -42,7 +42,7 @@ class MedicationController extends Controller
         {
             $medication = new Medication($request->all());
             $medication->save();
-            return response()->json($medication);
+            return response()->json([$medication], 201);
         }
     }
 

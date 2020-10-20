@@ -30,7 +30,7 @@ Route::post('details', [App\Http\Controllers\API\UserController::class, 'details
  *  Medication CRUD
  */
 Route::get('/medications', [App\Http\Controllers\API\MedicationController::class, 'index']);
-Route::post('/medications', [App\Http\Controllers\API\MedicationController::class, 'store'])->middleware('auth:api');
+Route::post('/medications', [App\Http\Controllers\API\MedicationController::class, 'store'])->middleware('auth:api', 'elevated');
 Route::get('/medications/{id}', [App\Http\Controllers\API\MedicationController::class, 'show']);
 Route::put('/medications/{id}', [App\Http\Controllers\API\MedicationController::class, 'update']);
 Route::post('/medications/{id}', [App\Http\Controllers\API\MedicationController::class, 'destroy'])->middleware('auth:api');
