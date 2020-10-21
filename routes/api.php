@@ -25,6 +25,17 @@ Route::post('login', [App\Http\Controllers\API\UserController::class, 'login']);
 Route::post('register', [App\Http\Controllers\API\UserController::class, 'register']);
 
 Route::post('details', [App\Http\Controllers\API\UserController::class, 'details'])->middleware('doctor', 'auth:api');
+// List all doctors
+Route::get('list_doctors',  [App\Http\Controllers\API\UserController::class, 'list_doctors'])->middleware( 'auth:api');
+
+// Permissions
+// List all users + permissions.
+Route::get('list_users',  [App\Http\Controllers\API\UserController::class, 'list_users'])->middleware( 'auth:api', 'elevated');
+// Handle permissions. tf = 1 -> permission is given, tf = 0 -> permission is revoke.
+Route::post('users/admin/{user_id}/{tf}',  [App\Http\Controllers\API\UserController::class, 'handlePermissionsAdmin'])->middleware( 'auth:api', 'elevated');
+// Doctor: add mobile_phone in post.
+Route::post('users/doctor/{user_id}/{tf}',  [App\Http\Controllers\API\UserController::class, 'handlePermissionsDoctor'])->middleware( 'auth:api', 'elevated');
+
 
 /*
  *  Medication CRUD
