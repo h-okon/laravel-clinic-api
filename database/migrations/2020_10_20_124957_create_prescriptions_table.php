@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePerscriptionsTable extends Migration
+class CreatePrescriptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePerscriptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('perscriptions', function (Blueprint $table) {
+        Schema::create('prescription', function (Blueprint $table) {
             $table->id();
             $table->timestamps();             // data wystawienia (timestampy)
             //

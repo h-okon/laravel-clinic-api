@@ -24,7 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login', [App\Http\Controllers\API\UserController::class, 'login']); //-> name('login');
 Route::post('register', [App\Http\Controllers\API\UserController::class, 'register']);
 
-Route::post('details', [App\Http\Controllers\API\UserController::class, 'details'])->middleware('auth:api');
+Route::post('details', [App\Http\Controllers\API\UserController::class, 'details'])->middleware('doctor', 'auth:api');
 
 /*
  *  Medication CRUD
