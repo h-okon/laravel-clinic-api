@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public $successStatus = 200;
     /**
-     * login api
+     * Authentication API
      *
      * @return \Illuminate\Http\Response
      */
@@ -115,7 +115,7 @@ class UserController extends Controller
         $tf = intval($tf);
         if($tf !== 0 && $tf !== 1)
         {
-            return response()->json(['error' => 'tf must be 0 (revoke) or 1 (grant)'], 400);
+            return response()->json(['status'=>'error', 'message' => 'tf must be 0 (revoke) or 1 (grant)'], 400);
         }
         try
         {
@@ -127,7 +127,7 @@ class UserController extends Controller
         }
         $user->is_elevated = $tf;
         $user->save();
-        return response()->json('Elevated permissions updated.', 200);
+        return response()->json(['status'=> 'success','message'=>'Elevated permissions updated.'], 200);
     }
     public function handlePermissionsDoctor($user_id, $tf, Request $request)
     {
@@ -144,7 +144,7 @@ class UserController extends Controller
             }
             if(isset($usr->doctor->user_id))
             {
-                return response()->json('Already is doctor.', 400);
+                return response()->json(['status'=> 'error', 'message' => 'Already is doctor.'], 400);
             }
             else
             {
@@ -153,7 +153,7 @@ class UserController extends Controller
                     'mobile_phone' => 'required'
                 ]);
                 if ($validator->fails()) {
-                    return response()->json(['error'=>$validator->errors()], 401);
+                    return response()->json(['status'=> 'error', 'message'=>$validator->errors()], 401);
                 }
                 else{
                     $input = $request->all();
@@ -162,7 +162,7 @@ class UserController extends Controller
                     $doctor->user_id = $usr->id;
                     $doctor->mobile_phone = $mobile_phone;
                     $doctor->save();
-                    return response()->json('Added to doctor group.', 200);
+                    return response()->json(['status'=> 'success','message'=>'Added to doctor group.'], 200);
                 }
             }
         }
@@ -178,7 +178,7 @@ class UserController extends Controller
             }
             if(!isset($usr->doctor->id))
             {
-                return response()->json('Already not a doctor.', 400);
+                return response()->json(['status'=> 'failed','message'=>'Already not a doctor.'], 400);
             }
             else
             {
