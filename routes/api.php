@@ -26,11 +26,11 @@ Route::post('register', [App\Http\Controllers\API\UserController::class, 'regist
 
 Route::post('details', [App\Http\Controllers\API\UserController::class, 'details'])->middleware('doctor', 'auth:api');
 // List all doctors
-Route::get('list_doctors',  [App\Http\Controllers\API\UserController::class, 'list_doctors'])->middleware( 'auth:api');
+Route::get('/doctors',  [App\Http\Controllers\API\UserController::class, 'list_doctors'])->middleware( 'auth:api');
 
 // Permissions
 // List all users + permissions.
-Route::get('list_users',  [App\Http\Controllers\API\UserController::class, 'list_users'])->middleware( 'auth:api', 'elevated');
+Route::get('/patients',  [App\Http\Controllers\API\UserController::class, 'list_users'])->middleware( 'auth:api', 'doctor');
 // Handle permissions. tf = 1 -> permission is given, tf = 0 -> permission is revoke.
 Route::post('users/admin/{user_id}/{tf}',  [App\Http\Controllers\API\UserController::class, 'handlePermissionsAdmin'])->middleware( 'auth:api', 'elevated');
 // Doctor: add mobile_phone in post.
@@ -45,7 +45,6 @@ Route::post('/medications', [App\Http\Controllers\API\MedicationController::clas
 Route::get('/medications/{id}', [App\Http\Controllers\API\MedicationController::class, 'show']);
 Route::put('/medications/{id}', [App\Http\Controllers\API\MedicationController::class, 'update']);
 Route::post('/medications/{id}', [App\Http\Controllers\API\MedicationController::class, 'destroy'])->middleware('auth:api');
-
 
 
 
