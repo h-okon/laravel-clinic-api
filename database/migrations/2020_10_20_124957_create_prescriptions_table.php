@@ -15,15 +15,14 @@ class CreatePrescriptionsTable extends Migration
     {
         Schema::create('prescription', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();             // data wystawienia (timestampy)
-            //
-            // id pacjenta
+            $table->timestamps();
+            // patient ID
             $table->unsignedBigInteger('patient_id');
-            // id doktora
+            // doctor ID
             $table->unsignedBigInteger('doctor_id');
-            // kod dostępu 4 znaki (random generator)
+            // access code 4 digit (random generator)
             $table->integer('access_code')->nullable(true)->default(rand(0,9999));
-            //  zawartosc (plain text)
+            //  content (plain text)
             $table->text('content')->default("Brak zawartości");
         });
     }
