@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @mixin Builder
+ * @mixin \Illuminate\Database\Query\Builder
  */
 class Doctor extends Model
 {
