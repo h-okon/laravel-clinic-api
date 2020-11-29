@@ -75,6 +75,7 @@ class PrescriptionController extends Controller
     // show prescriptions for doctor (all prescriptions that have been issued by given doctor)
     public function show_prescription_for_doctor($user_id)
     {
+
         try{
             $doc = \App\Models\Doctor::where('user_id', $user_id)->findOrFail();
         }
@@ -83,5 +84,6 @@ class PrescriptionController extends Controller
             return response()->json($exception->getMessage(), 400);
         }
         $prescriptions = \App\Models\Prescription::where('doctor_id', $user_id)->get();
+        return response()->json($prescriptions);
     }
 }
