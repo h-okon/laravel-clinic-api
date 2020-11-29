@@ -60,7 +60,7 @@ class PrescriptionController extends Controller
         return response()->json($prescription);
     }
     // show prescription for user (all for given user)
-    public function show_prescription_for_user($user_id)
+    public function show_prescription_for_patient($user_id)
     {
         try {
             $usr = \App\Models\User::findOrFail($user_id);
@@ -73,11 +73,15 @@ class PrescriptionController extends Controller
         return response()->json($prescriptions);
     }
     // show prescriptions for doctor (all prescriptions that have been issued by given doctor)
-    public function show_prescription_for_doctor($doctor_id)
+    public function show_prescription_for_doctor($user_id)
     {
         try{
-            $doc = \App\Models\Doctor::where('findOrFail()
+            $doc = \App\Models\Doctor::where('user_id', $user_id)->findOrFail();
         }
-
+        catch(ModelNotFoundException $exception)
+        {
+            return response()->json($exception->getMessage(), 400);
+        }
+        $prescriptions = \App\Models\Prescription::where('doctor_id', $user_id)->get();
     }
 }
