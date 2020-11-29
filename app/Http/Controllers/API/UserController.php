@@ -41,9 +41,11 @@ class UserController extends Controller
             }
         }
     }
+
     /**
      * Register api
      *
+     * @param Request $request
      * @return JsonResponse
      */
     public function register(Request $request){
