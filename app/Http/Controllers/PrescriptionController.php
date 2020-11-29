@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Prescription;
 use http\Env\Response;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use \Validator;
@@ -12,7 +13,7 @@ class PrescriptionController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     *  @return JsonResponse
      */
     public function index()
     {
@@ -23,7 +24,8 @@ class PrescriptionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
+     *
      */
     public function store($request)
     {
@@ -45,8 +47,8 @@ class PrescriptionController extends Controller
     /**
      * Gets single prescription with given ID.
      * @param int
+     * @return JsonResponse
      */
-    //
     public function  show($id)
     {
         try
@@ -59,7 +61,11 @@ class PrescriptionController extends Controller
         }
         return response()->json($prescription);
     }
-    // show prescription for user (all for given user)
+    /**
+     * Show all prescriptions for given patient (via user_id)
+     * @param $user_id
+     * @return JsonResponse
+     */
     public function show_prescription_for_patient($user_id)
     {
         try {
@@ -72,7 +78,11 @@ class PrescriptionController extends Controller
         $prescriptions = \App\Models\Prescription::where('patient_id', $user_id)->get();
         return response()->json($prescriptions);
     }
-    // show prescriptions for doctor (all prescriptions that have been issued by given doctor)
+    /**
+     * Show all prescriptions that have been issued by doctor (via user_id)
+     * @param $user_id
+     * @return JsonResponse
+     */
     public function show_prescription_for_doctor($user_id)
     {
 
