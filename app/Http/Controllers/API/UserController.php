@@ -1,10 +1,12 @@
 <?php
 namespace App\Http\Controllers\API;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Patient;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use phpDocumentor\Reflection\Types\Integer;
 use \Validator;
@@ -15,7 +17,7 @@ class UserController extends Controller
     /**
      * Authentication API
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function login(){
         $validator = Validator::make(request()->all(),[
@@ -42,7 +44,7 @@ class UserController extends Controller
     /**
      * Register api
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function register(Request $request){
         $validator = Validator::make($request->all(), [
@@ -67,7 +69,7 @@ class UserController extends Controller
     /**
      * details api
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function details()
     {
@@ -77,7 +79,7 @@ class UserController extends Controller
     /**
      * return list of all users + permissions;
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function list_users()
     {
@@ -98,7 +100,7 @@ class UserController extends Controller
     /**
      * return list of all doctors
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function list_doctors()
     {
