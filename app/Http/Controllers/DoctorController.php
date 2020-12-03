@@ -40,6 +40,7 @@ class DoctorController extends Controller
             $user->save();
             $success['token'] =  $user->createToken('MyApp')-> accessToken;
             $success['user'] = $user;
+            //$success['doctor'] = $user->doctor;
             return response()->json(['success'=>$success]);
         }
     }
