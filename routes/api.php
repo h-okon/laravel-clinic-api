@@ -22,8 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  * Authentication routes
  */
 Route::post('login', [App\Http\Controllers\API\UserController::class, 'login']); //-> name('login');
-Route::post('register', [App\Http\Controllers\API\UserController::class, 'register']);
-Route::post('register_doctor',[App\Http\Controllers\DoctorController::class, 'register']);
+Route::post('register', [App\Http\Controllers\API\UserController::class, 'register']); // -> name('register)
+Route::post('register_doctor',[App\Http\Controllers\DoctorController::class, 'register']); // -> name('doc_reg');
 Route::post('details', [App\Http\Controllers\API\UserController::class, 'details'])->middleware('doctor', 'auth:api');
 // List all doctors
 Route::get('/doctors',  [App\Http\Controllers\API\UserController::class, 'list_doctors'])->middleware( 'auth:api');
