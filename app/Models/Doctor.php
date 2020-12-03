@@ -13,7 +13,9 @@ use Illuminate\Database\Eloquent\Builder;
 class Doctor extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'specialization',
+    ];
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

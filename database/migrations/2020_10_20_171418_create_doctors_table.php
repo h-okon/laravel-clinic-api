@@ -17,7 +17,7 @@ class CreateDoctorsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
-            $table->unsignedBigInteger('mobile_phone');
+            $table->string('specialization');
             $table->index('user_id');
         });
     }

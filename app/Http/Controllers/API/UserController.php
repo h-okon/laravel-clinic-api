@@ -34,7 +34,7 @@ class UserController extends Controller
                 $user = Auth::user();
                 $success['token'] =  $user->createToken('MyApp')-> accessToken;
                 $user->save();
-                return response()->json(['success' => $success], $this-> successStatus);
+                return response()->json(['success' => $success, 'user' => $user], $this-> successStatus);
             }
             else{
                 return response()->json(['error'=>'Unauthorised.'], 401);
@@ -54,6 +54,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required',
             'c_password' => 'required|same:password',
+            'pesel' => 'required|min:8|unique:users',
         ]);
         if ($validator->fails()) {
             return response()->json(['error'=>$validator->errors()], 401);
@@ -62,9 +63,12 @@ class UserController extends Controller
             $input = $request->all();
             $input['password'] = bcrypt($input['password']);
             $user = User::create($input);
+            $user['is_elevated'] = 0;
+            $user['is_doctor']   = 0;
             $user->patient()->create(); // Create patient object when creating user
-            $success['token'] =  $user->createToken('Klinika')-> accessToken;
-            $success['name'] =  $user->name;
+            $user->save();
+            $success['token'] =  $user->createToken('MyApp')-> accessToken;
+            $success['user'] = $user;
             return response()->json(['success'=>$success], $this-> successStatus);
         }
     }

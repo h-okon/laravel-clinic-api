@@ -17,7 +17,6 @@ class CreatePatientsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
-
             $table->index('user_id');
         });
     }
