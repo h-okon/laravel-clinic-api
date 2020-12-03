@@ -98,7 +98,8 @@ Used to register a new user.
     "email": "[valid email address]",
     "name": "[name]",
     "password": "[password in plain text]",
-    "c_password": "[password in plain text]"
+    "c_password": "[password in plain text]",
+    "pesel": "[number, min: 8, unique]",
 }
 ```
 
@@ -110,7 +111,8 @@ Used to register a new user.
     "email": "test@yandex.ru",
     "name": "Jan Kowalski",
     "password": "coolpassword123",
-    "c_password": "coolpassword123"
+    "c_password": "coolpassword123",
+    "pesel": "123456789",
 }
 ```
 
@@ -179,8 +181,28 @@ Used to register a new user.
 }
 ```
 
+##Register a new doctor
 
+Used to register a new user.
 
+**URL** : `/api/register_doctor`
+
+**Method** : `POST`
+
+**Auth required** : NO
+
+**Data constraints**
+
+```json
+{
+    "email": "[valid email address]",
+    "name": "[name]",
+    "password": "[password in plain text]",
+    "c_password": "[password in plain text]",
+    "pesel": "[number, min: 8, unique]",
+    "specialization": "[string, name of specialization]"
+}
+```
 
 
 
