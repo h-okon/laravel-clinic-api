@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PrescriptionController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,20 +31,16 @@ Route::get('/doctors',  [App\Http\Controllers\API\UserController::class, 'list_d
 // Permissions
 // List all users + permissions.
 Route::get('/patients',  [App\Http\Controllers\API\UserController::class, 'list_users'])->middleware( 'auth:api', 'doctor');
-// Handle permissions. tf = 1 -> permission is given, tf = 0 -> permission is revoke.
 Route::post('users/admin/{user_id}/{tf}',  [App\Http\Controllers\API\UserController::class, 'handlePermissionsAdmin'])->middleware( 'auth:api', 'elevated');
-// Doctor: add mobile_phone in post.
-Route::post('users/doctor/{user_id}/{tf}',  [App\Http\Controllers\API\UserController::class, 'handlePermissionsDoctor'])->middleware( 'auth:api', 'elevated');
-
 
 /*
- *  Medication CRUD
+ *  Prescriptions
  */
-Route::get('/medications', [App\Http\Controllers\API\MedicationController::class, 'index']);
-Route::post('/medications', [App\Http\Controllers\API\MedicationController::class, 'store'])->middleware('auth:api', 'elevated');
-Route::get('/medications/{id}', [App\Http\Controllers\API\MedicationController::class, 'show']);
-Route::put('/medications/{id}', [App\Http\Controllers\API\MedicationController::class, 'update']);
-Route::post('/medications/{id}', [App\Http\Controllers\API\MedicationController::class, 'destroy'])->middleware('auth:api');
+Route::post('prescription', [App\Http\Controllers\PrescriptionController::class, 'store'])->middleware('doctor', 'auth:api');
+
+// Show all prescriptions for given patient {id}
+Route::get('p_prescriptions/{id}', [App\Http\Controllers\PrescriptionController::class, 'show_prescription_for_patient'])->middleware('auth:api');
+
 
 
 
