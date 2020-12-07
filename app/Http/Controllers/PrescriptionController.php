@@ -27,11 +27,12 @@ class PrescriptionController extends Controller
      * @param Request $request
      *
      */
-    public function store($request)
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'patient_id' => 'required',
             'doctor_id' => 'required',
+            'content' => 'required',
         ]);
         if($validator->fails())
         {
@@ -41,7 +42,7 @@ class PrescriptionController extends Controller
         {
             $prescription = new Prescription($request->all());
             $prescription->save();
-            return response()  -> json([$prescription], 201);
+            return response()  -> json(['success' => $prescription], 201);
         }
     }
     /**
@@ -57,9 +58,9 @@ class PrescriptionController extends Controller
         }
         catch (ModelNotFoundException $exception)
         {
-            return response()->json($exception->getMessage(), 400);
+            return response()->json(['error' => $exception->getMessage()], 400);
         }
-        return response()->json($prescription);
+        return response()->json(['success' => $prescription], 200);
     }
     /**
      * Show all prescriptions for given patient (via user_id)
@@ -73,10 +74,10 @@ class PrescriptionController extends Controller
         }
         catch(ModelNotFoundException $exception)
         {
-            return response()->json($exception->getMessage(), 400);
+            return response()->json(['error' => $exception->getMessage()], 400);
         }
         $prescriptions = \App\Models\Prescription::where('patient_id', $user_id)->get();
-        return response()->json($prescriptions);
+        return response()->json(['success' => $prescriptions], 200);
     }
     /**
      * Show all prescriptions that have been issued by doctor (via user_id)

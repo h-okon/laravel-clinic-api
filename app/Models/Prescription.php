@@ -15,6 +15,8 @@ class Prescription extends Model
     use HasFactory;
     protected $fillable = [
         'content',
+        'patient_id',
+        'doctor_id',
     ];
 
 

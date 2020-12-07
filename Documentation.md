@@ -181,7 +181,7 @@ Used to register a new user.
 }
 ```
 
-##Register a new doctor
+## Register a new doctor
 
 Used to register a new user.
 
@@ -204,5 +204,143 @@ Used to register a new user.
 }
 ```
 
+
+# Prescription
+
+
+# Add a new prescription
+
+Used to register a new user.
+
+**URL** : `/api/prescription/`
+
+**Method** : `POST`
+
+**Auth required** : auth:api, doctor
+
+**Data constraints**
+
+```json
+{
+    "patient_id": "[int: user_id of the patient]",
+    "doctor_id": "[int: user_id of the doctor]",
+    "content": "[plain text content]"
+}
+```
+
+**Data example**
+
+```json
+
+{
+    "patient_id": 5,
+    "doctor_id": 39,
+    "content": "Rotarix 1,5ml 2x daily"
+}
+```
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content example**
+
+```json
+{
+    "success": {
+        "patient_id": "5",
+        "doctor_id": "39",
+        "content": "Rotarix 1,5ml 2x daily",
+        "updated_at": "2020-12-07T20:55:15.000000Z",
+        "created_at": "2020-12-07T20:55:15.000000Z",
+        "id": 4042
+    }
+}
+```
+
+## Error Response
+
+**Condition** : If one of the field is missing (example for c_password)
+
+**Code** : `401 UNAUTHORIZED`
+
+**Content** :
+
+```json
+{
+    "error": {
+        "content": [
+            "The content field is required."
+        ]
+    }
+}
+```
+# List prescriptions for given Patient
+
+Returns a list of prescriptions for a user
+
+**URL** : `/api/prescription/{id}`
+
+**Method** : `GET`
+
+**Auth required** : auth:api
+
+**Data constraints**
+
+```json
+{
+    {id} : id of the user you would like to get the prescriptions
+}
+```
+
+**Data example**
+
+: `/api/prescription/5`
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content example**
+
+```json
+{
+    "success": 
+    {
+        "id": 1,
+        "created_at": "2020-12-07T20:49:36.000000Z",
+        "updated_at": "2020-12-07T20:49:36.000000Z",
+        "patient_id": "1",
+        "doctor_id": "1",
+        "access_code": "9936",
+        "content": "samplecontent"
+    },
+    {
+        "id": 2,
+        "created_at": "2020-12-07T20:54:17.000000Z",
+        "updated_at": "2020-12-07T20:54:17.000000Z",
+        "patient_id": "1",
+        "doctor_id": "1",
+        "access_code": "9936",
+        "content": "Second Sample Content"
+    }
+}
+```
+
+## Error Response
+
+**Condition** : The user does not exsist
+
+**Code** : `400 BAD REQUEST`
+
+**Content** :
+
+```json
+{
+    "error": {
+        "No query result for model User with id 71."
+    }
+}
+```
 
 

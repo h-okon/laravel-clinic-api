@@ -17,8 +17,8 @@ class DoctorMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $usr = Auth::user();
-        if(isset($usr->doctor()->id))
+        $user = Auth::user();
+        if(isset($user->doctor))
         {
             return $next($request);
         }
