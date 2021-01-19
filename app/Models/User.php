@@ -55,4 +55,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(Doctor::class, 'user_id');
     }
+    public function visits()
+    {
+        return $this->hasMany(\App\Models\visit::class, 'user_id');
+    }
 }

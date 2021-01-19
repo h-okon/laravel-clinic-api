@@ -23,7 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  */
 Route::post('login', [App\Http\Controllers\API\UserController::class, 'login']); //-> name('login');
 Route::post('register', [App\Http\Controllers\API\UserController::class, 'register']); // -> name('register)
-Route::post('register_doctor',[App\Http\Controllers\DoctorController::class, 'register']); // -> name('doc_reg');
+Route::post('register_doctor',[App\Http\Controllers\DoctorController::class, 'register']);
 Route::post('details', [App\Http\Controllers\API\UserController::class, 'details'])->middleware('doctor', 'auth:api');
 // List all doctors
 Route::get('/doctors',  [App\Http\Controllers\API\UserController::class, 'list_doctors'])->middleware( 'auth:api');
@@ -33,6 +33,9 @@ Route::get('/doctors',  [App\Http\Controllers\API\UserController::class, 'list_d
 Route::get('/patients',  [App\Http\Controllers\API\UserController::class, 'list_users'])->middleware( 'auth:api', 'doctor');
 Route::post('users/admin/{user_id}/{tf}',  [App\Http\Controllers\API\UserController::class, 'handlePermissionsAdmin'])->middleware( 'auth:api', 'elevated');
 
+Route::post('/visits', [App\Http\Controllers\API\VisitController::class, 'store']);
+
+Route::get('/doctors_specialization', [App\Http\Controllers\DoctorController::class, 'list_doc_spec']);
 /*
  *  Prescriptions
  */

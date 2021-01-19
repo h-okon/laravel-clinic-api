@@ -44,4 +44,19 @@ class DoctorController extends Controller
             return response()->json(['success'=>$success]);
         }
     }
+    public function list_doc_spec(Request $request)
+    {
+        $specialization = $request->all()['specialization'];
+        $doctors = \App\Models\Doctor::all('id', 'specialization')->where('specialization', '=', $specialization);
+
+        foreach($doctors as $doc)
+        {
+            $user = \App\Models\User::all('name')->where('id', '=', $doc->user_id)->first();
+            $doc['name'] = $user->name;
+            $visits = \App\Models\visit::all('date')->where('doctor_id', '=', $doc->user_id);
+            $doc['visits'] = $visits;
+        }
+        return response()->json($doctors, 201);
+    }
+
 }

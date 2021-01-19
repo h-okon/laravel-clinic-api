@@ -24,4 +24,8 @@ class Doctor extends Model
     {
         return $this->hasMany(Prescription::class, 'doctor_id');
     }
+    public function visits()
+    {
+        return $this->hasMany(\App\Models\visit::class, 'doctor_id');
+    }
 }
