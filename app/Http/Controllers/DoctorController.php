@@ -50,9 +50,10 @@ class DoctorController extends Controller
         $doctors = \App\Models\Doctor::all('user_id', 'specialization')->where('specialization', '=', $specialization);
         foreach($doctors as $doc)
         {
+            $user_id = $doc->user_id;
             $user_name = User::find($doc->user_id)->name;
             $doc['name'] = $user_name;
-            $visits = \App\Models\visit::all('date')->where('doctor_id', '=', $doc->user_id);
+            $visits = \App\Models\visit::where('doctor_id', '=', $user_id)->get('date');
             $doc['visits'] = $visits;
         }
         return response()->json($doctors, 201);
