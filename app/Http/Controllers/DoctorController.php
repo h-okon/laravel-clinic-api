@@ -47,12 +47,11 @@ class DoctorController extends Controller
     public function list_doc_spec(Request $request)
     {
         $specialization = $request->all()['specialization'];
-        $doctors = \App\Models\Doctor::all('id', 'specialization')->where('specialization', '=', $specialization);
-
+        $doctors = \App\Models\Doctor::all('user_id', 'specialization')->where('specialization', '=', $specialization);
         foreach($doctors as $doc)
         {
-            $user = \App\Models\User::all('name')->where('id', '=', $doc->user_id)->first();
-            $doc['name'] = $user->name;
+            $user_name = User::find($doc->user_id)->name;
+            $doc['name'] = $user_name;
             $visits = \App\Models\visit::all('date')->where('doctor_id', '=', $doc->user_id);
             $doc['visits'] = $visits;
         }
