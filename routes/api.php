@@ -33,7 +33,7 @@ Route::get('/doctors',  [App\Http\Controllers\API\UserController::class, 'list_d
 Route::get('/patients',  [App\Http\Controllers\API\UserController::class, 'list_users'])->middleware( 'auth:api', 'doctor');
 Route::post('users/admin/{user_id}/{tf}',  [App\Http\Controllers\API\UserController::class, 'handlePermissionsAdmin'])->middleware( 'auth:api', 'elevated');
 
-Route::post('/visits', [App\Http\Controllers\API\VisitController::class, 'store']);
+Route::post('/visits', [App\Http\Controllers\VisitController::class, 'store'])->middleware('cors');;
 
 Route::get('/doctors_specialization', [App\Http\Controllers\DoctorController::class, 'list_doc_spec']);
 /*

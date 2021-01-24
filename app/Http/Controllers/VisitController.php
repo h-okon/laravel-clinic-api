@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use \Validator;
 
 class VisitController extends Controller
 {
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
             'doctor_id' => 'required',
-            'date' => 'required'
+            'date' => 'required|unique:visits',
+            'user_id' => 'required'        
         ]);
         if($validator->fails())
         {
@@ -19,7 +21,7 @@ class VisitController extends Controller
         }
         else
         {
-            $visit = new Visit($request->all());
+            $visit = new \App\Models\Visit($request->all());
             $visit->save();
             return response()  -> json(['success' => $visit], 201);
         }
